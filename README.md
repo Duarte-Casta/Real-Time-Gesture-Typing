@@ -19,7 +19,7 @@ to be defined
 ## Dataset
 This project uses a hand gesture dataset from Kaggle:
 
-- Dataset: [Hand Gesture Recognition Dataset]([https://www.kaggle.com/SEU-LINK-AQUI](https://www.kaggle.com/datasets/grassknoted/asl-alphabet))
+- Dataset: [ASL Alphabet]([https://www.kaggle.com/SEU-LINK-AQUI](https://www.kaggle.com/datasets/grassknoted/asl-alphabet))
 - Source: Kaggle
 
 Download the dataset from Kaggle and place it in the `data/` folder.
