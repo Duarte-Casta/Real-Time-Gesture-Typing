@@ -10,7 +10,7 @@ Model: test_model
 - prediction: 55.17% -> 16/29 right
 - notes: 
         This model was trained with 20% of the training data and validated with 20% of the validation data, and only 10 epochs to speed up the training process.
-        After 10 epochs of training, the model achieved an accuraçy of 69.18% and loss of 1.1517 on training and 28.91% accuracy and loss of 2.8343 on validation.
+        After 10 epochs of training, the model achieved an accuracy of 69.18% and loss of 1.1517 on training and 28.91% accuracy and loss of 2.8343 on validation.
         This model was used as a sanity check to verify that the data pipeline, model architecture, and training process were functioning correctly, and was not intended for performance evaluation.
 
 ==============================
@@ -26,7 +26,10 @@ Model: test_model_v2
 - prediction: 89.66% -> 26/29 right
 - notes: 
         This model was trained with 40% of the training data and validated with 40% of the validation data, and only 10 epochs.
-        After 10 epochs of training, the model achieved an accuraçy of 91.89% and loss of 0.4677 on training and 96.54% accuracy and loss of 0.3527 on validation.
+        After 10 epochs of training, the model achieved an accuracy of 91.89% and loss of 0.4677 on training and 96.54% accuracy and loss of 0.3527 on validation.
         This model was used as a sanity check to verify that the model architecture (especially the data augmentation) was functioning correctly, and was not intended for performance evaluation, although it showed promising results.
-
+- problem:
+        This model tends to misclassify 'R', 'U', and 'Z' as 'X'.
+- solution:
+        Update data augmentation; increase number of epochs; (this issue might disappear when training on the full dataset)
 ==============================
