@@ -1,0 +1,16 @@
+
+==============================
+Model: test_model
+- img_size: 128
+- batch_size: 64
+- initializer: he_normal
+- augmentation: Contrast(0.2), Zoom(0.1/0.1), Saturation(0.1), Flip('horizontal'), Width(0.1), Rotation(0.05),Translation(0.1/0.1)
+- model: 3 blocks conv2d + head dense (batchnorm, GAP, dense 64 + dropout 20%, dense 29)
+- result: acc=0.6918  loss=1.1517 / val_acc=0.2891  val_loss=2.8343
+- prediction: 55.17% -> 16/29 right
+- notes: 
+        This model was trained with 20% of the training data and validated with 20% of the validation data, and only 10 epochs to speed up the training process.
+        After 10 epochs of training, the model achieved an accuraçy of 69.18% and loss of 1.1517 on training and 28.91% accuracy and loss of 2.8343 on validation.
+        This model was used as a sanity check to verify that the data pipeline, model architecture, and training process were functioning correctly, and was not intended for performance evaluation.
+
+==============================
