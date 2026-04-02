@@ -33,3 +33,20 @@ Model: test_model_v2
 - solution:
         Update data augmentation; increase number of epochs; (this issue might disappear when training on the full dataset)
 ==============================
+
+==============================
+Model: test_model_finetuning_v1
+- img_size: 128
+- batch_size: 64
+- augmentation: Contrast(0.2), Zoom(0.1/0.1), Brightness(0.001), Flip('horizontal'), Width(0.05), Rotation(0.05),Translation(0.01/0.01)
+- model: pretrained model (MobileNetV2) + GAP, dense 128(activation='relu') + dropout 30%, dense 29(activation='softmax')
+- result: acc=0.8648  loss=0.4200 / val_acc=0.9238  val_loss=0.2396
+- prediction: 93.10% -> 27/29 right
+- notes:
+        The model architecture was based on a pre-trained MobileNetV2 as the base, with a custom head. 
+        This model was trained with 40% of the training data and validated with 40% of the validation data, training for 10 epochs.
+        Was introduced a fine-tuning phase with the last 30 layers of the base model unfrozen, and trained for 5 more epochs with a lower learning rate.
+        After 10 epochs of training, the model achieved an accuraçy of 86.48% and loss of 0.4200 on training and 92.38% accuracy and loss of 0.2396 on validation.
+        This model was used as a sanity check to verify that the model architecture (especially the pretrained and the fine-tuned layers) was functioning correctly, and was not intended for performance evaluation, although it showed promising results.
+
+==============================
