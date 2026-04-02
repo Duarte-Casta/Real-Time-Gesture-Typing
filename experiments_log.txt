@@ -50,3 +50,20 @@ Model: test_model_finetuning_v1
         This model was used as a sanity check to verify that the model architecture (especially the pretrained and the fine-tuned layers) was functioning correctly, and was not intended for performance evaluation, although it showed promising results.
 
 ==============================
+
+==============================
+Model: test_model_finetuning_v2
+- img_size: 128
+- batch_size: 64
+- augmentation: Contrast(0.2), Zoom(0.1/0.1), Brightness(0.001), Flip('horizontal'), Width(0.05), Rotation(0.05),Translation(0.01/0.01)
+- model: pretrained model (MobileNetV2) + GAP, dense 128(activation='relu') + dropout 30%, dense 29(activation='softmax')
+- result: acc=0.9304  loss=0.2090 / val_acc=0.9366  val_loss=0.1869
+- prediction: 96.55% -> 28/29 right
+- notes:
+        The model architecture was based on a pre-trained MobileNetV2 as the base, with a custom head. 
+        This model was trained with 40% of the training data and validated with 40% of the validation data, training for 20 epochs(stopped after 8 epochs).
+        Was introduced a fine-tuning phase with the last 30 layers of the base model unfrozen, and trained for 10 more epochs with a lower learning rate (stopped after 10 epochs).
+        After the training, the model achieved an accuraçy of 93.04% and loss of 0.2090 on training and 93.66% accuracy and loss of 0.1869 on validation.
+        This model was used as a sanity check to verify that the model architecture (especially the pretrained and the fine-tuned layers) was functioning correctly, and was not intended for performance evaluation, although it showed promising results.
+
+==============================
