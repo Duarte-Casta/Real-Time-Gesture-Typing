@@ -14,8 +14,7 @@ Train a computer vision model on a hand gesture dataset and use it for real-time
 - On-screen text output
 
 ## Requirements
-to be defined
-
+hand_landmarker.task -> command: curl -o hand_landmarker.task https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task
 ## Dataset
 This project uses a hand gesture dataset from Kaggle:
 
