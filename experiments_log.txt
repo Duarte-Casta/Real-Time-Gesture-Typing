@@ -84,3 +84,20 @@ Model: test_model_finetuning_v3
         This model was used to compare some parameters (especially the number of trainable layers for second fase of fitand the callbacks) and was not intended for performance evaluation, although it showed promising results.
 
 ==============================
+
+==============================
+Model: model_v1
+- img_size: 128
+- batch_size: 64
+- augmentation: Contrast(0.2), Zoom(0.1/0.1), Brightness(0.001), Flip('horizontal'), Width(0.05), Rotation(0.05),Translation(0.01/0.01)
+- model: pretrained model (MobileNetV2) + GAP, dense 128(activation='relu') + dropout 30%, dense 29(activation='softmax')
+- result: acc=0.9851  loss=0.0455 / val_acc=0.9963  val_loss=0.0103
+- prediction: 100% -> 29/29 right
+- notes:
+        The model architecture was based on a pre-trained MobileNetV2 as the base, with a custom head. 
+        This model was trained with full dataset, training for 20 epochs(stopped after 8 epochs).
+        The model was then fine-tuned with the last 40 layers of the base model unfrozen, and trained for 20 more epochs with a lower learning rate (stopped after 20 epochs with 19 epoch being the best).
+        After the training, the model achieved an accuraçy of 98.51% and loss of 0.0455 on training and 99.63% accuracy and loss of 0.0103 on validation.
+        This is the first version of the final model.
+
+==============================
