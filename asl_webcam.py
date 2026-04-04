@@ -5,10 +5,13 @@ from mediapipe.tasks.python import vision
 import numpy as np
 from tensorflow.keras.models import load_model
 
+import time
+from collections import Counter
+
 # CONFIG
 MODEL_PATH = "models/model_v1.keras"
 IMG_SIZE = 128
-CONF_THRESHOLD = 0.7
+CONF_THRESHOLD = 0.3
 
 # labels
 labels = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + ["del", "nothing", "space"]
@@ -29,6 +32,14 @@ detector = vision.HandLandmarker.create_from_options(options)
 # WEBCAM
 cap = cv2.VideoCapture(0)
 
+# Buffer para estabilizar previsões
+start_time = time.time()
+INTERVAL = 2
+pred_buffer = []
+last_letter = ""
+output_file = open("output.txt", "w")
+
+# loop principal
 while True:
     ret, frame = cap.read()
     if not ret:
@@ -51,7 +62,7 @@ while True:
             x_min, x_max = min(x_list), max(x_list)
             y_min, y_max = min(y_list), max(y_list)
 
-            padding = 40
+            padding = 30
             x_min = max(0, x_min - padding)
             y_min = max(0, y_min - padding)
             x_max = min(w, x_max + padding)
@@ -89,6 +100,7 @@ while True:
                 class_id = np.argmax(pred)
                 confidence = np.max(pred)
                 label = labels[class_id] if confidence > CONF_THRESHOLD else "..."
+                pred_buffer.append(labels[class_id])
                 print(f"Predicted: {label} ({confidence:.2f})")
 
                 # Desenhar resultado
@@ -101,6 +113,21 @@ while True:
 
     if cv2.waitKey(1) & 0xFF == 27:
         break
+
+    current_time = time.time()
+
+    if current_time - start_time > INTERVAL and len(pred_buffer) > 0:
+        most_common = Counter(pred_buffer).most_common(1)[0][0]
+
+        if most_common != last_letter:
+            output_file.write(most_common)
+            output_file.flush()
+            last_letter = most_common
+
+        pred_buffer = []
+        start_time = current_time
+
+output_file.close()
 
 cap.release()
 cv2.destroyAllWindows()
