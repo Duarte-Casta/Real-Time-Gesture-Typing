@@ -81,13 +81,13 @@ while True:
 
             if hand_img.size != 0:
                 # Criar máscara da mão usando landmarks relativos ao crop
-                mask = np.zeros((y_max - y_min, x_max - x_min), dtype=np.uint8)
+                """mask = np.zeros((y_max - y_min, x_max - x_min), dtype=np.uint8)
                 pts = np.array([[int((lm.x * w) - x_min), int((lm.y * h) - y_min)] for lm in hand_landmarks])
                 cv2.fillPoly(mask, [pts], 255)
 
-                # Blur do fundo dentro do quadrado
+                # Blur do fundo dentro do    quadrado
                 blurred = cv2.GaussianBlur(hand_img, (25, 25), 0)
-                hand_img = np.where(mask[:, :, None] == 255, hand_img, blurred)
+                hand_img = np.where(mask[:, :, None] == 255, hand_img, blurred)"""
 
                 # Preprocess para o modelo
                 img = cv2.resize(hand_img, (IMG_SIZE, IMG_SIZE))
