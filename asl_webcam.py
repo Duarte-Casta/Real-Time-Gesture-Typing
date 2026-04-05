@@ -9,12 +9,12 @@ import time
 from collections import Counter
 
 # CONFIG
-MODEL_PATH = "models/model_v1.keras"
+MODEL_PATH = "models/test_model_psl_v1.keras"
 IMG_SIZE = 128
-CONF_THRESHOLD = 0.3
+CONF_THRESHOLD = 0.5
 
 # labels
-labels = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + ["del", "nothing", "space"]
+labels = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ") # + ["del", ""space"]
 
 # LOAD MODEL
 model = load_model(MODEL_PATH)
