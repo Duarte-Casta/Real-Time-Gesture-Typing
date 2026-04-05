@@ -101,3 +101,22 @@ Model: model_v1
         This is the first version of the final model.
 
 ==============================
+
+==============================
+Model: test_model_psl_v1
+- img_size: 128
+- batch_size: 64
+- augmentation: Contrast(0.2), Zoom(0.1/0.1), Brightness(0.001), Flip('horizontal'), Width(0.05), Rotation(0.05),Translation(0.01/0.01)
+- model: pretrained model (MobileNetV2) + GAP, dense 128(activation='relu') + dropout 30%, dense 26(activation='softmax')
+- result: acc=0.9924  loss=0.0233 / val_acc=0.9893  val_loss=0.0305
+- prediction: untested (WIP)
+- notes:
+        The model architecture was based on a pre-trained MobileNetV2 as the base, with a custom head.
+        After realizing that the previous dataset wasn't the best, It was decided to create a new dataset with better real-world samples. Having the chance to create the dataset from scratch, the language was changed to psl (Portuguese Sign Language). 
+        This model was trained with full dataset, training for 20 epochs(stopped after 20 epochs).
+        The model was then fine-tuned with the last 40 layers of the base model unfrozen, and trained for 20 more epochs with a lower learning rate (stopped after 20 epochs with 19 epoch being the best).
+        After the training, the model achieved an accuraçy of 99.24% and loss of 0.0233 on training and 98.93% accuracy and loss of 0.0305 on validation.
+        This  version of the portuguese model does not include the "space" nor "delete" classes.
+
+
+==============================
